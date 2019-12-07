@@ -1,0 +1,121 @@
+e02FCi5NhPj1fm8lMijm
+
+BASIC SYMBOL -> sed ''  --> sed 's/rohit/tanu/g'  (rohit which is replace by tanu) --> Here S means substitute
+
+
+1) search and replace file 
+
+ls -lrth | sed 's/file3/file300/g' 
+
+2) if you want to change exat word of file then
+
+ls -lrth | sed 's/\bfile3\b/file300/g'   --> \b(filename)\b -to use exat name
+
+
+3) To change fist charactor or line with other
+
+sed 's/^/tanu/g' hello.txt    --> use '^' before initial word of line
+
+
+4) To change LAST charactor of line
+
+sed 's/$/tanu/g' hello.txt   --> use '$' (bar.$) end of first word
+
+5) delete any line that contains part of the whole string
+
+sed '/bar/d' hello.txt   --> add d to that cmd
+
+6) IF you want to do permenenat changes to linux files
+
+sed -i 's/bar/tanu/g' hello.txt   -->  add (-i) agter sed command
+
+7) TO join word before and after of each word
+
+ls -lrth | awk {'print $9'} | sed 's/^/manage show /' | sed 's/$/ all a/'   ---> line chyaa adhi jion karich asel word tr sed 's/^ /(add karicha word)/'
+
+8) To print perticulat line
+
+free -m | sed -n 2,4p    --> sed -n (ji line print karichi ahe ti and 2p) or sed -n 2,4p  (2,3,4 line)
+
+9) to exlude line
+ 
+sed '2! s/tanu/rohit/g' hello.txt   -> (To Exclude 2nd line from action)
+
+10) to DELETE line
+
+sed '1d'  hello.rxt
+sed '2d' hello.txt
+sed '$d' hello.txt (Last line)
+
+11) ls -lrth | awk {'print $9'} | sed -e  's/^/manage show /' -e   's/$/ all a/'  --> To add 2 action at a single time use -e 
+
+12) searching for perticular word and then replace 
+
+sed '/xxx/ s/love/Hate/' hello.txt   (IT means it search fro perticluar word and then replace with another word)(Mhanje jya line madhe XXX sel tich linue love / hate ne change hoil)
+
+
+======================================================================================================
+13) TILT ~ is use for every n th line of file ( for delet use d and p for print (dublicate )
+
+
+root@goorm:/opt# cat -n hello.txt
+     1  The is a test file created by nixCrft for demo purpose.
+     2  tanu is good. xxx
+     3  tanu is nice.
+     4  I love tanu.   xxx
+
+root@goorm:/opt# cat -n hello.txt | sed '1~3d'   --> use for every n th line
+     2  tanu is good. xxx
+     3  tanu is nice.
+root@goorm:/opt# cat -n hello.txt | sed '1,3d'   --> from one to 3rd 
+     4  I love tanu.   xxx
+root@goorm:/opt# cat -n hello.txt | sed '1,3p'  --> Print dublicate 
+
+     1  The is a test file created by nixCrft for demo purpose.
+     1  The is a test file created by nixCrft for demo purpose.
+     2  tanu is good. xxx
+     2  tanu is good. xxx
+     3  tanu is nice.
+     3  tanu is nice.
+     4  I love tanu.   xxx
+
+========================================================================================================
+14) Replace word with capital use capital U and & (U&)
+
+cat -n hello.txt | sed 's/tanu/\U&/g'==>> use \U& in between word to replace and g
+==========================================================================================================
+
+
+1) sed 's/#.*//g' hello.txt  --> remove line which starts from # (#. here .* means all charactor after * remove)
+
+2) To add multiple sed command we can use semicolon here
+
+sed 's/#.*//g;s/rohit/\U&/g' hello.txt  (single comma chya madhe lich sagle)
+
+3) to delete empty line
+
+root@goorm:/opt# cat hello.txt
+#The is a test file created by nixCrft for demo purpose.
+#tanu is good. xxx
+#tanu is nice.
+
+#I love tanu.   xxx
+
+
+rohit
+
+i Stay at kalyan
+root@goorm:/opt# sed '/^$/ d'  hello.txt
+#The is a test file created by nixCrft for demo purpose.
+#tanu is good. xxx
+#tanu is nice.
+#I love tanu.   xxx
+rohit
+i Stay at kalyan
+=========================================================================
+
+
+
+
+
+
